@@ -27,3 +27,7 @@ function gotData(err, data, response) {
   }
 
 };
+
+T.get('followers/ids', { screen_name: 'doorainm' },  function (err, data, response) {
+  console.log(data)
+})
