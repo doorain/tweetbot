@@ -12,6 +12,9 @@ var T = new Twit({
   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
 });
 
+
+///////////////////Functions ////////////////////
+//---------Search Twitter---------//
 function search(){
   var params = {
     q: 'Taylor Swift',
@@ -19,7 +22,6 @@ function search(){
   }
 
   T.get('search/tweets', params, gotData);
-
   function gotData(err, data, response){
     var tweets = data.statuses;
     for (var i = 0; i < tweets.length; i++){
@@ -27,24 +29,35 @@ function search(){
     }
   };
 }
+//search()
 
-function tweetIt(){
+//---------Post To Twitter Account---------//
+function tweetIt(txt){
   var tweet = {
-    status: '#node.js from Node.js'
+    status: txt
   }
 
   T.post('statuses/update', tweet, tweeted);
-
-  function tweeted(err, data, response) {
+    function tweeted(err, data, response) {
     if (err){
-      console.log("Error");
+      console.log("Error with tweet!");
     }
-    else (console.log("Tweet Posted"));
+    else (console.log("Tweet Posted!"));
   }
 }
+//tweetIt()
 
+//---------setting up user Stream---------//
+//setting up user Stream
+var stream = T.stream('user');
 
+stream.on('follow', followed);
 
-// T.get('followers/ids', { screen_name: 'doorainm' },  function (err, data, response) {
-//   console.log(data)
-// })
+function followed(eventMsg){
+  var name = eventMsg.source.name;
+  var screenName = eventMsg.source.screen_name;
+  console.log('@' + screenName + ' Just followed you!');
+
+  tweetIt('@' + screenName + ' Thanks for the follow!')
+
+}
