@@ -1,5 +1,8 @@
+console.log("Its working");
+
+
 var Twit = require('twit');
-var config = require('./config.json');
+var config = require('./config');
 
 var T = new Twit({
   consumer_key: config.consumerKey,
