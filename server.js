@@ -1,4 +1,4 @@
-console.log("Its working");
+console.log("Node Server Running");
 
 
 var Twit = require('twit');
@@ -13,21 +13,34 @@ var T = new Twit({
 });
 
 
-var params = {
-  q: 'dorian',
-  count: '2'
+// var params = {
+//   q: 'Taylor Swift',
+//   count: '20'
+// }
+//
+// T.get('search/tweets', params, gotData);
+//
+// function gotData(err, data, response) {
+//   var tweets = data.statuses;
+//   for (var i = 0; i < tweets.length; i++){
+//       console.log(tweets[i].text)
+//   }
+//
+// };
+var tweet = {
+  status: '#node.js from Node.js'
 }
 
-T.get('search/tweets', params, gotData);
+T.post('statuses/update', tweet, tweeted);
 
-function gotData(err, data, response) {
-  var tweets = data.statuses;
-  for (var i = 0; i < tweets.length; i++){
-      console.log(tweets[i].text)
-  }
+function tweeted(err, data, response) {
+   if (err){
+     console.log("Error");
+   }
+   else (console.log("Tweet Posted"));
+}
 
-};
 
-T.get('followers/ids', { screen_name: 'doorainm' },  function (err, data, response) {
-  console.log(data)
-})
+// T.get('followers/ids', { screen_name: 'doorainm' },  function (err, data, response) {
+//   console.log(data)
+// })
