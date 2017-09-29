@@ -10,4 +10,16 @@ var T = new Twit({
   access_token: config.access_token,
   access_token_secret: config.access_token_secret,
   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
-})
+});
+
+
+var params = {
+  q: 'dorian',
+  count: '2'
+}
+
+T.get('search/tweets', params, gotData);
+
+function gotData(err, data, response) {
+  console.log(data)
+};
