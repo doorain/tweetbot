@@ -79,7 +79,6 @@ function tweetIt(txt){
     else (console.log("Tweet Posted!"));
   };
 
-
 }
 
 //---------Tweet after Follow---------//
